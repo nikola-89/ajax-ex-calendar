@@ -10,15 +10,7 @@ $(document).ready(function() {
     // ***************************
     builderDay = Handlebars.compile($('#day').html());
     // ***************************
-    // Days = with Sunday as 0 and Saturday as 6.
-    var days = moment().year(year).month(month).daysInMonth();
-    for (var i = 1; i <= days; i++) {
-        var config = {
-            'data': i,
-            'day' : moment([year, month, i]).format('dddd D MMMM YYYY')
-            }
-        $('.month').append(builderDay(config));
-    }
+    print(year, month);
     // ***************************
 });
 // ***************************
@@ -35,7 +27,7 @@ function request(url) {
                         response.push(value);
                     });
                     console.log(response);
-                    check(response);
+                    holidays(response);
                 } else {
                     error();
                 }
@@ -46,8 +38,19 @@ function request(url) {
         }
     );
 }
+function print(year, month) {
+// Days = with Sunday as 0 and Saturday as 6.
+var days = moment().year(year).month(month).daysInMonth();
+for (var i = 1; i <= days; i++) {
+    var config = {
+        'data': i,
+        'day' : moment([year, month, i]).format('dddd D MMMM YYYY')
+        }
+    $('.month').append(builderDay(config));
+    }
+}
 // ***************************
-function check(array) {
+function holidays(array) {
 for (var i = 0; i < array.length; i++) {
     if (moment(array[i].date).isValid()) {
         for (var x = 0; x < $('.month li').length; x++) {
