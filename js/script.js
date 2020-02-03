@@ -58,7 +58,8 @@ for (var i = 0; i < array.length; i++) {
         }
     }
 }
-
+// ***************************
 function error() {
+    console.log('da inserire fun errore');
 }
 // ***************************
