@@ -1,5 +1,7 @@
 $(document).ready(function() {
     // ***************************
+    moment.locale('it');
+    // ***************************
     var year_ = 2018;
     var month_ = 0;
     // ***************************
@@ -61,11 +63,13 @@ for (var i = 1; i <= base.daysInMonth(); i++) {
 }
 // ***************************
 function holidays(resp) {
+var builderHol = Handlebars.compile($('#holiday').html());
 for (var i = 0; i < resp.length; i++) {
     if (moment(resp[i].date).isValid()) {
         for (var x = 0; x < $('.days li').length; x++) {
             if (moment(resp[i].date).date() == $('.days li').eq(x).attr('data')) {
                 $('.days li').eq(x).addClass('holiday');
+                $('.days li').eq(x).append(builderHol(resp[i]));
                 }
             }
         }
