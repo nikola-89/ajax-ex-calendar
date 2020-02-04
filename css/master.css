@@ -29,6 +29,10 @@
     cursor: pointer;
 }
 
+.header .prev {
+    display: none;
+}
+
 .month {
     width: 300px;
     padding: 0 20px;
