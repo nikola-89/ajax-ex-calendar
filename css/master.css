@@ -13,17 +13,31 @@
 
 .header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin: 20px;
 }
 
+.header span {
+    color: blue;
+    font-size: 20px;
+    user-select: none;
+}
+
+.header span:hover {
+    color: green;
+    cursor: pointer;
+}
+
 .month {
+    width: 300px;
     padding: 0 20px;
+    text-align: center;
 }
 
 .month h1 {
     font-size: 50px;
+    user-select: none;
 }
 
 .holiday {

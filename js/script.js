@@ -1,25 +1,33 @@
 $(document).ready(function() {
     // ***************************
-    var year = 2018;
-    // Months = are zero indexed, so January is month 0.
-    var month = 11;
+    var year_ = 2018;
+    var month_ = 0;
     // ***************************
-    request(year, month);
+    var base = moment({year: year_, month: month_});
     // ***************************
-    print(year, month);
+    request(base);
     // ***************************
+    print(base);
+    // ***************************
+    $(document).on('click', '.prev, .next', function() {
+        if ($(this).hasClass('prev')) {
+            prevM(base)
+        } else {
+            nextM(base);
+        }
+    });
 });
 // ***************************
 // *-------*function*--------*
 // ***************************
-function request(year, month) {
+function request(base) {
     $.ajax(
         {
             url: "https://flynn.boolean.careers/exercises/api/holidays",
             method: "GET",
             data: {
-                year : year,
-                month : month
+                year : base.year(),
+                month : base.month()
             },
             success: function (r) {
                 if (r.success) {
@@ -36,19 +44,17 @@ function request(year, month) {
     );
 }
 // ***************************
-function print(year, month) {
+function print(base) {
 var builderDay = Handlebars.compile($('#day').html());
 var builderMonth = Handlebars.compile($('#month').html());
 var config_month = {
-    'month': moment().month(month).format('MMMM')
+    'month' : base.format('MMMM')
     }
 $('.month').append(builderMonth(config_month));
-// Days = Sunday as 0 and Saturday as 6.
-var days = moment().year(year).month(month).daysInMonth();
-for (var i = 1; i <= days; i++) {
+for (var i = 1; i <= base.daysInMonth(); i++) {
     var config_days = {
         'data': i,
-        'day' : moment([year, month, i]).format('dddd D YYYY')
+        'day' : base.date(i).format('dddd D YYYY')
         }
     $('.days').append(builderDay(config_days));
     }
@@ -66,7 +72,33 @@ for (var i = 0; i < resp.length; i++) {
     }
 }
 // ***************************
+function prevM(base) {
+    base = base.subtract(1, 'months');
+    request(base);
+    $('.month h1').remove();
+    $('.days li').remove();
+    print(base);
+    if (base.month() == '0') {
+        $(this).css({'display' : 'none'});
+    } else if (base.month() == '11') {
+        $('.next').css({'display' : 'block'});
+    }
+}
+// ***************************
+function nextM(base) {
+    base = base.add(1, 'months');
+    request(base);
+    $('.month h1').remove();
+    $('.days li').remove();
+    print(base);
+    if (base.month() == '11') {
+        $(this).css({'display' : 'none'});
+    } else if (base.month() == '0') {
+        $('.prev').css({'display' : 'block'});
+    }
+}
+// ***************************
 function error() {
-    console.log('ERR_');
+    console.log('ERROR');
 }
 // ***************************
