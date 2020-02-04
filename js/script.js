@@ -1,11 +1,12 @@
 $(document).ready(function() {
     // ***************************
+    moment.locale('it');
+    // ***************************
     var year = 2018;
     // Months = are zero indexed, so January is month 0.
-    var month = 11;
+    var month = 0;
     // ***************************
-    var url_api = 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=' + month;
-    request(url_api);
+    request(year, month);
     // ***************************
     print(year, month);
     // ***************************
@@ -13,21 +14,22 @@ $(document).ready(function() {
 // ***************************
 // *-------*function*--------*
 // ***************************
-function request(url) {
+function request(year, month) {
     $.ajax(
         {
-            url: url,
+            url: 'https://flynn.boolean.careers/exercises/api/holidays',
             method: "GET",
+            data: {
+                year : year,
+                month : month
+            },
             success: function (r) {
                 if (r.success) {
                     console.log(r.response);
                     holidays(r.response);
-                } else {
-                    error();
                 }
             },
             error: function () {
-                error();
             }
         }
     );
@@ -35,30 +37,32 @@ function request(url) {
 // ***************************
 function print(year, month) {
 var builderDay = Handlebars.compile($('#day').html());
+var builderMonth = Handlebars.compile($('#month').html());
+var config_month = {
+    'month': moment().month(month).format('MMMM')
+    }
+$('.month-text').append(builderMonth(config_month));
 // Days = Sunday as 0 and Saturday as 6.
 var days = moment().year(year).month(month).daysInMonth();
 for (var i = 1; i <= days; i++) {
-    var config = {
-        'data': i,
-        'day' : moment([year, month, i]).format('dddd D MMMM YYYY')
+    var config_days = {
+        'day': i
         }
-    $('.month').append(builderDay(config));
+    $('.cal-text-col').append(builderDay(config_days));
     }
 }
 // ***************************
 function holidays(resp) {
+var builderHolidays = Handlebars.compile($('#holidays').html());
 for (var i = 0; i < resp.length; i++) {
     if (moment(resp[i].date).isValid()) {
-        for (var x = 0; x < $('.month li').length; x++) {
-            if (moment(resp[i].date).date() == $('.month li').eq(x).attr('data')) {
-                $('.month li').eq(x).addClass('holiday');
+        for (var x = 0; x < $('.cal-text-col div').length; x++) {
+            if (moment(resp[i].date).date() == $('.cal-text-col div').eq(x).attr('data')) {
+                $('.cal-text-col div').eq(x).append(builderHolidays(resp[i]));
+                $('.cal-text-col div').eq(x).addClass('holiday');
                 }
             }
         }
     }
-}
-// ***************************
-function error() {
-    console.log('da inserire fun errore');
 }
 // ***************************
