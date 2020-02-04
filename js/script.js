@@ -11,7 +11,7 @@ $(document).ready(function() {
     // ***************************
     $(document).on('click', '.prev, .next', function() {
         if ($(this).hasClass('prev')) {
-            prevM(base)
+            prevM(base);
         } else {
             nextM(base);
         }
@@ -78,9 +78,9 @@ function prevM(base) {
     $('.month h1').remove();
     $('.days li').remove();
     print(base);
-    if (base.month() == '0') {
-        $(this).css({'display' : 'none'});
-    } else if (base.month() == '11') {
+    if (base.month() == 0) {
+        $('.prev').css({'display' : 'none'});
+    } else {
         $('.next').css({'display' : 'block'});
     }
 }
@@ -91,9 +91,9 @@ function nextM(base) {
     $('.month h1').remove();
     $('.days li').remove();
     print(base);
-    if (base.month() == '11') {
-        $(this).css({'display' : 'none'});
-    } else if (base.month() == '0') {
+    if (base.month() == 11) {
+        $('.next').css({'display' : 'none'});
+    } else {
         $('.prev').css({'display' : 'block'});
     }
 }
