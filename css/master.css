@@ -2,141 +2,31 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
-div .holiday,
-.days-text,
-.main-wrapper,
-.front,
-.month-text {
+.wrapper {
     display: flex;
-}
-
-.front,
-.days-text,
-.cal-text-col div {
-    background-color: #F6E9DC;
-}
-
-.main-wrapper {
-    justify-content: center;
-    align-items: center;
-}
-
-/* main-wrapper */
-.main-wrapper {
-    height: 100vh;
-    width: 100vw;
-    background-image: linear-gradient(180deg ,#dddbd1 ,#F6E9DC);
-}
-
-/* app-wrapper */
-.app-wrapper {
-    width: 1000px;
-    border-top: 2px solid #f44336;
-    border-left: 2px solid #f44336;
-    box-shadow: 0 1px 1px 0 rgba(0 ,0 ,0 , .06), 0 2px 5px 0 rgba(0 ,0 ,0, .2);
-    background-color: #F6E9DC;
-    background-image:
-    linear-gradient(90deg, transparent 79px, #4E4F4A 79px, #4E4F4A 81px, transparent 81px),
-    linear-gradient(#FFF .1em, transparent .1em);
-    background-size: 100% 1.2em;
-}
-
-/* .message-box */
-.front {
-    flex: 100%;
-    justify-content: space-between;
-    align-items: center;
-    border-right: 2px solid #f44336;
-    height: 96px;
-}
-
-/* arrow-left arrow-right */
-.arrow-left,
-.arrow-right {
-    margin: 0 30px;
-    font-size: 50px;
-    color: #f44336;
-}
-
-.arrow-left:hover,
-.arrow-right:hover {
-    color: #983d37;
-    cursor: pointer;
-}
-
-/* month-text */
-.month-text {
-    justify-content: center;
-    background-color: #4E4F4A;
-}
-
-.month-text h2 {
-    color: #F6E9DC;
-    font-size: 60px;
-    font-weight: 700;
-    padding: 5px 30px;
-    text-transform: uppercase;
-    user-select: none;
-}
-
-/* days-text */
-.days-text {
-    justify-content: space-around;
-}
-
-.days-text div {
-    width: calc(100% / 7);
-    border-right: 2px solid #f44336;
-    border-top: 2px solid #f44336;
-    border-bottom: 2px solid #f44336
-}
-
-.days-text h4 {
-    color: #4E4F4A;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 3px;
-}
-
-/* cal-text-col */
-.cal-text-col div {
-    float: left;
-    color: #4E4F4A;
-    height: 90px;
-    width: calc(100% / 7);
-    border-bottom: 2px solid #f44336;
-    border-right: 2px solid #f44336;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.cal-text-col h4 {
-    font-size: 60px;
-}
-
-.cal-text-col h5 {
-    font-size: 14px;
-}
-
-/* holiday */
-div .holiday {
     flex-direction: column;
-    justify-content: space-between;
-    color: #FFF;
-    background-color: #f44336;
+    align-items: center;
 }
 
-div .holiday h4 {
-    font-size: 43px;
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
 }
 
-/* ******************************************** */
-@media only screen and (max-width: 1200px) {
-    .main-wrapper .app-wrapper{
-        width: 100vw;
-        height: 100vh;
-    }
+.month {
+    padding: 0 20px;
+}
+
+.month h1 {
+    font-size: 50px;
+}
+
+.holiday {
+    font-weight: bold;
+    color: #f44336;
 }
