@@ -127,11 +127,3 @@ div .holiday {
 div .holiday h4 {
     font-size: 43px;
 }
-
-/* ******************************************** */
-@media only screen and (max-width: 1200px) {
-    .main-wrapper .app-wrapper{
-        width: 100vw;
-        height: 100vh;
-    }
-}
