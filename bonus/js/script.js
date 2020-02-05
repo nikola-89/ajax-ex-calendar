@@ -19,6 +19,16 @@ $(document).ready(function() {
             nextM(base);
         }
     });
+    $(document).keydown(function() {
+        switch (event.which) {
+            case 37:
+                prevM(base);
+                break;
+            case 39:
+                nextM(base);
+                break;
+        };
+    });
 });
 // ***************************
 // *-------*function*--------*
